@@ -1,4 +1,4 @@
-# COM-S-327-Repo
+# COM-S-327-Repository
 
 This repository is intended store my progress through COM S 327 at Iowa State University.
 
