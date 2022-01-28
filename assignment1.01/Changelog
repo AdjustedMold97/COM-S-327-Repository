@@ -1,3 +1,21 @@
 1/27
 
 Today I created the Makefile and initial C file for the assignment.
+
+I have now created:
+
+An enum "terrain" to maintain the different terrain features which can be
+found on the map.
+
+A struct "point" which holds an x coordinate, a y coordinate, and a terrain
+type.
+
+My main starts by creating an 80 x 21 array of terrains. It populates the
+edges with "wall"s and the spaces in the middle with "empty".
+
+The main method also generates exits on each of the four edges of the map
+(randomly), and gives those locations in the array the "door" property.
+
+A print method was included to display the map.
+
+I begun work on using Dijkstra's Algorithm to find a path between two exits.
