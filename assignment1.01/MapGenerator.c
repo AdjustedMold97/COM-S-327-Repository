@@ -4,6 +4,7 @@
 
 int DIMX = 80;
 int DIMY = 21;
+//essentially arbitrary, just needs to be bigger than DIMX * DIMY
 int INFINITY = 9999;
 
 enum terrain {
@@ -18,6 +19,8 @@ typedef struct point {
 	int x;
 	int y;
 	enum terrain t;
+	//used for drawing paths
+	point parent;
 } point;
 
 void printMap(enum terrain map[DIMX][DIMY]);
@@ -26,53 +29,74 @@ void printMap(enum terrain map[DIMX][DIMY]);
 //and then drawing that path onto the map.
 void drawPath(enum terrain map[DIMX][DIMY], point a, point b)
 {
-
 	int visited[DIMX][DIMY];
+	int distance[DIMX][DIMY];
 
 	int i;
 	int j;
-
+	
+	//by default, set visited for all nodes to 0
+	//default distance is INFINITY
 	for (j = 0; j < DIMY; j++)
 	{
 		for (i = 0; i < DIMX; i++)
 		{
 			visited[i][j] = 0;
+			distance[i][j] = INFINITY;
 		}
 	}
 
-	//we have already visited the start point
-	visited[a.x][a.y] = 1;
+	//distance from a is 0
+	distance[a.x][a.y] = 0;
 
-	//calculating the cost of all points from the starting position
-	//essentially the "walking distance"
-	int cost[DIMX][DIMY];
+	//returns the parent node of parent[i][j]
+	point parent[DIMX][DIMY];
 
-	int xcost;
-	int ycost;
+	point current;
+	current.t = path;
 
-	for (j = 0; j < DIMY; j++)
+	int mindist = INFINITY;
+
+	while (visited[b.x][b.y] == 0)
 	{
-
-		if (a.y < j)
-			ycost = j - a.y;
-
-		else
-			ycost = a.y - j;
-
-		for (i = 0; i < DIMX; i++)
+		//first find the node with the smallest distance
+		for (j = 0; j < DIMY; j++)
 		{
-			if (a.x < i)
-				xcost = i - a.x;
+			for (i = 0; i < DIMX; i++)
+			{
+				//ignore nodes we've already visited
+				if (visited[i][j] == 1)
+					continue;
 
-			else
-				xcost = a.x - i;
-			
-			cost[i][j] = xcost + ycost;
+				if (distance[i][j] < mindist)
+				{
+					current.x = i;
+					current.y = j;
+					mindist = distance[i][j];
+				}				
+			}
+		}
+
+		visited[current.x][current.y] = 1;
+
+		//checking each neighbor surrounding current
+		for (j = current.y - 1; j <= current.y + 1; j++)
+		{
+			for (i = current.x - 1; i <= current.x + 1; i++)
+			{
+				//if the neighbor is out of bounds, continue.
+				if (i < 0 || i >= DIMX || j < 0 || j >= DIMY)
+					continue;
+					
+				//if we have already visited this node, continue.
+				if (visited[i][j] == 1)
+					continue;
+				
+				distance[i][j] = mindist + 1;
+			       	parent[i][j] = current;
+			}
 		}
 	}
-
-		
-
 }
 
 int main(int argc, char *argv[])

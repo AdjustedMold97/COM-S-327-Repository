@@ -19,3 +19,8 @@ The main method also generates exits on each of the four edges of the map
 A print method was included to display the map.
 
 I begun work on using Dijkstra's Algorithm to find a path between two exits.
+
+1/28
+
+Continuing work on Dijkstra's Algorithm, trying to make my implementation more
+efficient.
