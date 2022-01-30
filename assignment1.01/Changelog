@@ -24,3 +24,43 @@ I begun work on using Dijkstra's Algorithm to find a path between two exits.
 
 Continuing work on Dijkstra's Algorithm, trying to make my implementation more
 efficient.
+
+1/29
+
+Through extensive testing, the algorithm is sufficient, although there are
+some unexplained edge cases that required specific patching.
+
+Added an additional central point "intersection" whose coordinates are
+determined randomly. Each exit simply connects to the intersection.
+
+Tightened the screws on path finding, and generated a random biome for each
+quadrant created by the paths.
+
+Finished biome population. Basically, each quadrant is assigned a biome, and
+in some cases some empty space remains.
+
+To get around this, we also populate each empty space with a randomly selected
+biome. This also makes the map feel more natural.
+
+Also, added different colored characters to give the map a more natural feel.
+
+Added Center and Mart generation. The program is now "complete."
+
+There are a few edge cases which I still need to fix.
+
+1/30
+
+Looked more closely at the assignment spec to see if I could meet the
+criteria. There were really only a couple of stylistic changes I needed to
+make:
+
+Make walls boulders (%)
+Generate tall grass and clearings
+Make Centers and Marts 2x2
+
+I also fixed the edge cases which made Mart and Center generation difficult.
+
+I'm not sure how large the clearings are supposed to be, so for now I'm
+leaving it as it is, and possibly changing it after class on Tuesday.
+
+This is essentially finished.
